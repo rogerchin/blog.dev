@@ -11,7 +11,18 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/resume', 'HomeController@showResume');
+
+Route::get('/portfolio', 'HomeController@showPortfolio');
+
+Route::get('/sayhello/{name}', function($name)
 {
-	return View::make('hello');
+    if ($name == "Chris") {
+        return Redirect::to('/');
+    } else {
+        $data = array('name' => $name);
+        return View::make('my-first-view')->with($data);
+    }
 });
+
+
