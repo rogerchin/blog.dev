@@ -9,8 +9,9 @@ class UserTableSeeder extends Seeder {
 		$user->username = 'admin';
 		$user->email = $_ENV['USER_EMAIL'];
 		$user->password = Hash::make($_ENV['USER_PASS']);
-		$user->birthday = '';
-		$user->phone_number = '';
-		$user->zip_code = '';
+		$user->birthday = '1991-01-11';
+		$user->phone_number = '1234567890';
+		$user->zip_code = '78230';
+		$user->save();
 	}
 }

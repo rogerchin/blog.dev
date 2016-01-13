@@ -27,7 +27,7 @@ class HomeController extends BaseController {
 
 	public function showPortfolio()
 	{
-		return "This is my portfolio";
+		return View::make('portfolio');
 	}
 
 	public function sayHello()

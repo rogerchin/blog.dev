@@ -1,22 +1,23 @@
 @extends('layouts.master')
 
 @yield('top-script')
+
 @section('content')
 
 <div class="container">
-	{{ Form::open(array('action' => 'PostsController@store'))}}
+	{{ Form::model($post, array('action' => array('PostsController@update', $post->id), 'method' => 'PUT')) }}
 
 		<div class="form-group {{($errors->has('title')) ? 'has-error' : '' }} ">
 			{{$errors->first('title', '<div class="alert alert-danger">:message</div>')}}
 		    {{Form::label('title', 'Title')}}
 		    <br>
-		    {{Form::text('title', null, ['class'=> 'form-control', 'placeholder'=> 'Enter your title'])}}
+		    {{Form::text('title', null, ['class'=> 'form-control', 'placeholder'=> 'Enter your title', 'value' => $post->title])}}
 		</div>
 
 		<div class="form-group {{($errors->has('description')) ? 'has-error' : '' }}">
 		    {{ $errors->first('description', '<div class="alert alert-danger" role="alert">:message</div>')}}
 		    {{Form::label('description', 'Description')}}
-		    {{Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Enter the description'])}}
+		    {{Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Enter the description', 'value' => $post->description])}}
 		</div>
 
 		<div class="form-group">
@@ -26,6 +27,8 @@
 		</div>	
 
 		<button class="btn btn-primary">Submit</button>
-	</form>
-</div>
+	{{ Form::close()}}
+</div>	
+
+
 @stop

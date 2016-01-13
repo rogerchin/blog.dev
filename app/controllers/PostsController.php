@@ -9,7 +9,11 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return 'all posts';
+		$posts = Post::paginate(4);
+		$data = array(
+			'posts'=> $posts
+		);
+		return View::make('posts.index')->with($data);
 	}
 
 
@@ -19,7 +23,7 @@ class PostsController extends \BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
+	{	
 		return View::make('posts.create');
 	}
 
@@ -31,18 +35,29 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$post = new Post();
-		$post->title = Input::get('');
+		$validator = Validator::make(Input::all(), Post::$rules);
 
-		$result = $post->save(); 
-		
-		if($result) {
-			return "Your post was saved!";
-		}else {
-			return Redirect::back();
+		//inputs fail validation
+		if($validator->fails()) {
+			return Redirect::back()->withInput()->withErrors($validator);
+		} else 
+		{	
+			$post = new Post();
+			$post->title = Input::get('title');
+			$post->description = Input::get('description');
+			$post->user_id = Input::get('user_id');
+
+			$result = $post->save(); 
+
+			if($result) {
+				Session::flash('successMessage', 'Your post was saved!');
+				return Redirect::action('PostsController@show', $post->id);
+			}else {
+				return Redirect::back()->withInput();
+			}
+			
 		}
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -52,9 +67,14 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$post = Post::find($id)
+		$post = Post::find($id);
 
-		return 'a specified post';
+		if(!$post){
+			Session::flash('errorMessage', 'This post does not exist');
+			return Redirect::action('PostsController@index');
+		}
+
+		return View::make('posts.show')->with('post', $post);
 	}
 
 
@@ -66,7 +86,8 @@ class PostsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$post = Post::find($id);
+		return View::make('posts.edit')->with('post', $post);
 	}
 
 
@@ -78,9 +99,34 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$post = Post::find($id);
+		return $this->validateAndSave($post);
 	}
 
+	protected function validateAndSave($post)
+	{
+		//create the validator
+		$validator = Validator::make(Input::all(), Post::$rules);
+
+		//attempt validation
+		if($validator->fails()){
+			return Redirect::back()->withInput()->withErrors($validator);
+		} else {
+			$post->title = Input::get('title');
+			$post->description = Input::get('description');
+
+			$post->user_id = 1;
+
+			$result = $post->save();
+
+			if($result){
+				Session::flash('successMessage', 'Your post was saved');
+				return Redirect::action('PostsController@show', $post->id);	
+			} else {
+				return Redirect::back()->withInput();
+			}
+		}
+	}
 
 	/**
 	 * Remove the specified resource from storage.
@@ -90,7 +136,10 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$post = Post::find($id);
+		$post->delete();
+		Session::flash('successMessage', 'Your post was deleted');
+		return Redirect::action('PostsController@index');
 	}
 	
 
