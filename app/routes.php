@@ -44,6 +44,9 @@ Route::get('/session', function(){
 	return Session::all();
 });
 
+Route::get('login', 'HomeController@getLogin');
+Route::post('login', 'HomeController@postLogin');
+Route::get('logout', 'HomeController@getLogout');
 // Route::get('/orm-test', function(){
 // 	$post = Post::find(2);
 // 	dd($post);

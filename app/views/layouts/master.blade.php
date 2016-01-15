@@ -30,7 +30,14 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand" href="{{{action('HomeController@showPortfolio')}}}">My Portfolio</a>
+	                <div class="list-inline">
+		                <li>	
+		                	<a class="navbar-brand" href="{{{action('HomeController@showPortfolio')}}}">My Portfolio</a>
+		                </li>
+		                <li>
+		                	<a class="navbar-brand" href="http://pdfsr.com/pdf/roger-chin-resume-2016.pdf">Resume</a>
+		                </li>		
+	            	</div>
 	            </div>
 
 	            <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,8 +53,12 @@
 	                        <a href="post.html">Sample Post</a>
 	                    </li>
 	                    <li>
-	                        <a href="contact.html">Contact</a>
+	                    	<a class="btn btn-lg" href="{{{action('HomeController@getLogin')}}}">Sign In</a>
 	                    </li>
+	                    <li>
+	                        <a href="{{{action('HomeController@getLogout')}}}">Sign Out</a>
+	                    </li>
+	                    
 	                </ul>
 	            </div>
 	            <!-- /.navbar-collapse -->
@@ -111,7 +122,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Roger Chin productions</p>
+                    <p class="copyright text-muted">Roger Chin Productions</p>
                 </div>
             </div>
         </div>
