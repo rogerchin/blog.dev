@@ -19,7 +19,7 @@ class PostTableSeeder extends Seeder {
 		$post2->username = 'admin';
 		$post2->date = '2016-01-11';
 		$post2->description = 'This is my second blog post.';
-		$post2->user_id= $user=>id;
+		$post2->user_id = $user=>id;
 		$post2->save();
 
 		$post3 = new Post();

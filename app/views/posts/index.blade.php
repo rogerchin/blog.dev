@@ -16,8 +16,9 @@
 	            			{{{$post->title}}}
 	            		</h2>
 	            		<h3 class="post-subtitle">
-	            			By: {{{$post->username}}}
+	            			By: {{{$post->user->username}}}
 	            		</h3>
+                        <small>{{{$post->created_at->format('F jS Y @ h:i:s A')}}}</small>
             		</a>
             	<p class="post-meta">{{{$post->description}}}</p>
             	<hr>	

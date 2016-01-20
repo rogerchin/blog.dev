@@ -28,10 +28,8 @@ class UpdatePostsTableMigration extends Migration {
 	{
 		Schema::table('posts', function(Blueprint $table)
 		{
-			$table->dropForeign('posts_users_id_foreign');
+			$table->dropForeign('posts_user_id_foreign');
 		});
-
-		Schema::drop('posts');
 	}
 
 }

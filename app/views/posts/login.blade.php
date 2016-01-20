@@ -7,7 +7,7 @@
 		{{Form::open(array('action'=>'HomeController@postLogin'))}}
 			<div class="form-group inline-list">
 				{{Form::label('email', 'Email')}}
-				{{Form::text('email', null, array('class'=> 'form-control', 'placeholder'=> 'Enter your email'))}}
+				{{Form::email('email', null, array('class'=> 'form-control', 'placeholder'=> 'Enter your email'))}}
 			</div>
 			<div class="form-group inline-list">
 				{{Form::label('password', 'Password')}}

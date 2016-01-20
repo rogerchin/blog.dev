@@ -24,6 +24,7 @@ class CreateUsersTableMigration extends Migration {
 			$table->string('phone_number', 20);
 			$table->integer('zip_code');		
 			$table->timestamps();
+			$table->rememberToken();
 		});
 	}
 

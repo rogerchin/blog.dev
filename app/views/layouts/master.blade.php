@@ -49,15 +49,15 @@
 	                    <li>
 	                        <a href="create">Create</a>
 	                    </li>
-	                    <li>
-	                        <a href="post.html">Sample Post</a>
-	                    </li>
-	                    <li>
+	                    @if(!Auth::user())
+						<li>
 	                    	<a class="btn btn-lg" href="{{{action('HomeController@getLogin')}}}">Sign In</a>
 	                    </li>
-	                    <li>
+	                	@elseif(Auth::user())
+	                	<li>
 	                        <a href="{{{action('HomeController@getLogout')}}}">Sign Out</a>
 	                    </li>
+	                	@endif
 	                    
 	                </ul>
 	            </div>

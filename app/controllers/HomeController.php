@@ -50,10 +50,11 @@ class HomeController extends BaseController {
 		$email = Input::get('email');
 		$password = Input::get('password');
 		if (Auth::attempt(array('email'=> $email, 'password' => $password))){
+			Session::flash('successMessage', 'Your post was saved!');
 			return Redirect::intended('/posts');
 		} else {
 			//login failed
-			// Session::flash('Login Failed!')
+			Session::flash('errorMessage', 'Login Failed!');
 			return Redirect::back();
 		}	
 	}
@@ -63,4 +64,5 @@ class HomeController extends BaseController {
 		Auth::logout();
 		return Redirect::action('PostsController@index');
 	}
+
 }

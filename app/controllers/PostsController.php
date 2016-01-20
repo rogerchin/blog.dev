@@ -15,15 +15,15 @@ class PostsController extends BaseController {
 
 	public function index()
 	{
-		$posts = Post::paginate(4);
-		$data = array(
-			'posts'=> $posts
-		);
-		return View::make('posts.index')->with($data);
+		// $posts = Post::paginate(4);
+		// $data = array(
+		// 	'posts'=> $posts
+		// );
+		// return View::make('posts.index')->with($data);
 
-		// $posts = Post::with('user')->orderBy('created_at', 'desc')->paginate(4);
+		$posts = Post::with('user')->orderBy('created_at', 'desc')->paginate(4);
 		
-		// return View::make('posts.index')->with('posts',$posts);
+		return View::make('posts.index')->with('posts',$posts);
 	}
 
 
