@@ -11,7 +11,7 @@ class PostTableSeeder extends Seeder {
 		$post1->username = 'admin';
 		$post1->date = '2016-01-11';
 		$post1->description = 'This is my first blog post on my laravel blog';
-		$post1->user_id = $user=>id;
+		$post1->user_id = $user->id;
 		$post1->save();
 
 		$post2 = new Post();
@@ -19,7 +19,7 @@ class PostTableSeeder extends Seeder {
 		$post2->username = 'admin';
 		$post2->date = '2016-01-11';
 		$post2->description = 'This is my second blog post.';
-		$post2->user_id = $user=>id;
+		$post2->user_id = $user->id;
 		$post2->save();
 
 		$post3 = new Post();
@@ -27,7 +27,7 @@ class PostTableSeeder extends Seeder {
 		$post3->username = 'admin';
 		$post3->date = '2016-01-11';
 		$post3->description = 'This is my third blog post';
-		$post3->user_id = $user=>id;
+		$post3->user_id = $user->id;
 		$post3->save();
 	}
 }
